@@ -63,6 +63,7 @@ function clearMostRecent() {
 }
 
 function calculateEquation() {
+  let isFirstEquation = true;
   let screenString = String(screen.innerText);
   let length = screenString.length;
   let equationTotal = 0;
@@ -70,18 +71,24 @@ function calculateEquation() {
   for (let i = 0; i < length; i++) {
     let numberOne = "";
     let numberTwo = "";
-    if (i > 1) {
+
+    if (i > 1 && isFirstEquation == false) {
       if (screenString[i] == "+") {
-        console.log("WE DID IT?!!!!!!");
         let k = i;
         do {
           k++;
           numberTwo += screenString[k];
         } while (range(0, 9).includes(parseInt(screenString[k + 1])));
-
         console.log("Numbber1: " + numberOne + "     number2: " + numberTwo);
         equationTotal = doAddition(equationTotal, numberTwo);
       } else if (screenString[i] == "-") {
+        let k = i;
+        do {
+          k++;
+          numberTwo += screenString[k];
+        } while (range(0, 9).includes(parseInt(screenString[k + 1])));
+        console.log("Numbber1: " + numberOne + "     number2: " + numberTwo);
+        equationTotal = doSubtraction(equationTotal, numberTwo);
       } else if (screenString[i] == "x") {
       } else if (screenString[i] == "/") {
       } else if (screenString[i] == "%") {
@@ -90,6 +97,7 @@ function calculateEquation() {
       }
     } else {
       if (screenString[i] == "+") {
+        isFirstEquation = false;
         let j = i;
         let k = i;
         do {
@@ -105,6 +113,21 @@ function calculateEquation() {
         console.log("Numbber1: " + numberOne + "     number2: " + numberTwo);
         equationTotal = doAddition(numberOne, numberTwo);
       } else if (screenString[i] == "-") {
+        isFirstEquation = false;
+        let j = i;
+        let k = i;
+        do {
+          j--;
+          numberOne += screenString[j];
+        } while (range(0, 9).includes(parseInt(screenString[j - 1])));
+        do {
+          k++;
+          numberTwo += screenString[k];
+        } while (range(0, 9).includes(parseInt(screenString[k + 1])));
+
+        numberOne = reverseString(numberOne);
+        console.log("Numbber1: " + numberOne + "     number2: " + numberTwo);
+        equationTotal = doSubtraction(numberOne, numberTwo);
       } else if (screenString[i] == "x") {
       } else if (screenString[i] == "/") {
       } else if (screenString[i] == "%") {
@@ -116,6 +139,15 @@ function calculateEquation() {
 
   writeAnswerToScreen(equationTotal);
 }
+
+function doSubtraction(firstNumber, secondNumber) {
+  let num1 = parseInt(firstNumber);
+  let num2 = parseInt(secondNumber);
+  let total = num1 - num2;
+  console.log("Total: " + total);
+  return total;
+}
+
 function doAddition(firstNumber, secondNumber) {
   let num1 = parseInt(firstNumber);
   let num2 = parseInt(secondNumber);
