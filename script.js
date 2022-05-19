@@ -53,6 +53,7 @@ function addition() {
 
 function clearEverything() {
   screen.innerHTML = " ";
+  answerScreen.innerHTML = "Ans = 0";
 }
 
 function clearMostRecent() {
@@ -69,29 +70,50 @@ function calculateEquation() {
   for (let i = 0; i < length; i++) {
     let numberOne = "";
     let numberTwo = "";
-    if (screenString[i] == "+") {
-      let j = i;
-      let k = i;
-      do {
-        j--;
-        numberOne += screenString[j];
-      } while (range(0, 9).includes(parseInt(screenString[j - 1])));
-      do {
-        k++;
-        numberTwo += screenString[k];
-      } while (range(0, 9).includes(parseInt(screenString[k + 1])));
+    if (i > 1) {
+      if (screenString[i] == "+") {
+        console.log("WE DID IT?!!!!!!");
+        let k = i;
+        do {
+          k++;
+          numberTwo += screenString[k];
+        } while (range(0, 9).includes(parseInt(screenString[k + 1])));
 
-      numberOne = reverseString(numberOne);
-      console.log("Numbber1: " + numberOne + "     number2: " + numberTwo);
-      equationTotal += doAddition(numberOne, numberTwo);
-    } else if (screenString[i] == "-") {
-    } else if (screenString[i] == "x") {
-    } else if (screenString[i] == "/") {
-    } else if (screenString[i] == "%") {
+        console.log("Numbber1: " + numberOne + "     number2: " + numberTwo);
+        equationTotal = doAddition(equationTotal, numberTwo);
+      } else if (screenString[i] == "-") {
+      } else if (screenString[i] == "x") {
+      } else if (screenString[i] == "/") {
+      } else if (screenString[i] == "%") {
+      } else {
+        continue;
+      }
     } else {
-      continue;
+      if (screenString[i] == "+") {
+        let j = i;
+        let k = i;
+        do {
+          j--;
+          numberOne += screenString[j];
+        } while (range(0, 9).includes(parseInt(screenString[j - 1])));
+        do {
+          k++;
+          numberTwo += screenString[k];
+        } while (range(0, 9).includes(parseInt(screenString[k + 1])));
+
+        numberOne = reverseString(numberOne);
+        console.log("Numbber1: " + numberOne + "     number2: " + numberTwo);
+        equationTotal = doAddition(numberOne, numberTwo);
+      } else if (screenString[i] == "-") {
+      } else if (screenString[i] == "x") {
+      } else if (screenString[i] == "/") {
+      } else if (screenString[i] == "%") {
+      } else {
+        continue;
+      }
     }
   }
+
   writeAnswerToScreen(equationTotal);
 }
 function doAddition(firstNumber, secondNumber) {
