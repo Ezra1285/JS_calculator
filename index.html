@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>First JavaScript Game</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <div id="calculator">
+    <div id="screen">
+      <span id="answerScreen">Ans = 0</span>
+      <span id="activeScreen"></span>
+    </div>
+
+    <div id="buttons">
+      <div class="eachButton" onclick="clearMostRecent()">C</div>
+      <div class="eachButton" onclick="clearEverything()">CE</div>
+      <div class="eachButton" onclick="remainder()">%</div>
+      <div class="eachButton" onclick="divison()">/</div>
+
+      <div class="eachButton" onclick="callSeven()">7</div>
+      <div class="eachButton" onclick="callEight()">8</div>
+      <div class="eachButton" onclick="callNine()">9</div>
+      <div class="eachButton" onclick="multiplication()">x</div>
+
+      <div class="eachButton" onclick="callFour()">4</div>
+      <div class="eachButton" onclick="callFive()">5</div>
+      <div class="eachButton" onclick="callSix()">6</div>
+      <div class="eachButton" onclick="subtraction()">-</div>
+
+      <div class="eachButton" onclick="callOne()">1</div>
+      <div class="eachButton" onclick="callTwo()">2</div>
+      <div class="eachButton" onclick="callThree()">3</div>
+      <div class="eachButton" onclick="addition()">+</div>
+
+      <div class="eachButton" id="zeroButton" onclick="callZero()">0</div>
+      <div class="eachButton" id="dotButton" onclick="addDot()">.</div>
+      <div class="eachButton" id="equalButton" onclick="calculateEquation()">
+        =
+      </div>
+    </div>
+  </div>
+
+  <body>
+    <script src="script.js"></script>
+  </body>
+</html>
