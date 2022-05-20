@@ -90,8 +90,29 @@ function calculateEquation() {
         console.log("Numbber1: " + numberOne + "     number2: " + numberTwo);
         equationTotal = doSubtraction(equationTotal, numberTwo);
       } else if (screenString[i] == "x") {
+        let k = i;
+        do {
+          k++;
+          numberTwo += screenString[k];
+        } while (range(0, 9).includes(parseInt(screenString[k + 1])));
+        console.log("Numbber1: " + numberOne + "     number2: " + numberTwo);
+        equationTotal = doMultiplication(equationTotal, numberTwo);
       } else if (screenString[i] == "/") {
+        let k = i;
+        do {
+          k++;
+          numberTwo += screenString[k];
+        } while (range(0, 9).includes(parseInt(screenString[k + 1])));
+        console.log("Numbber1: " + numberOne + "     number2: " + numberTwo);
+        equationTotal = doDivision(equationTotal, numberTwo);
       } else if (screenString[i] == "%") {
+        let k = i;
+        do {
+          k++;
+          numberTwo += screenString[k];
+        } while (range(0, 9).includes(parseInt(screenString[k + 1])));
+        console.log("Numbber1: " + numberOne + "     number2: " + numberTwo);
+        equationTotal = doRemainder(equationTotal, numberTwo);
       } else {
         continue;
       }
@@ -129,8 +150,51 @@ function calculateEquation() {
         console.log("Numbber1: " + numberOne + "     number2: " + numberTwo);
         equationTotal = doSubtraction(numberOne, numberTwo);
       } else if (screenString[i] == "x") {
+        isFirstEquation = false;
+        let j = i;
+        let k = i;
+        do {
+          j--;
+          numberOne += screenString[j];
+        } while (range(0, 9).includes(parseInt(screenString[j - 1])));
+        do {
+          k++;
+          numberTwo += screenString[k];
+        } while (range(0, 9).includes(parseInt(screenString[k + 1])));
+
+        numberOne = reverseString(numberOne);
+
+        equationTotal = doMultiplication(numberOne, numberTwo);
       } else if (screenString[i] == "/") {
+        isFirstEquation = false;
+        let j = i;
+        let k = i;
+        do {
+          j--;
+          numberOne += screenString[j];
+        } while (range(0, 9).includes(parseInt(screenString[j - 1])));
+        do {
+          k++;
+          numberTwo += screenString[k];
+        } while (range(0, 9).includes(parseInt(screenString[k + 1])));
+
+        numberOne = reverseString(numberOne);
+        equationTotal = doDivision(numberOne, numberTwo);
       } else if (screenString[i] == "%") {
+        isFirstEquation = false;
+        let j = i;
+        let k = i;
+        do {
+          j--;
+          numberOne += screenString[j];
+        } while (range(0, 9).includes(parseInt(screenString[j - 1])));
+        do {
+          k++;
+          numberTwo += screenString[k];
+        } while (range(0, 9).includes(parseInt(screenString[k + 1])));
+
+        numberOne = reverseString(numberOne);
+        equationTotal = doRemainder(numberOne, numberTwo);
       } else {
         continue;
       }
@@ -138,6 +202,28 @@ function calculateEquation() {
   }
 
   writeAnswerToScreen(equationTotal);
+}
+
+function doRemainder(firstNumber, secondNumber) {
+  let num1 = parseInt(firstNumber);
+  let num2 = parseInt(secondNumber);
+  let total = num1 % num2;
+  console.log("Total: " + total);
+  return total;
+}
+function doDivision(firstNumber, secondNumber) {
+  let num1 = parseInt(firstNumber);
+  let num2 = parseInt(secondNumber);
+  let total = num1 / num2;
+  console.log("Total: " + total);
+  return total;
+}
+function doMultiplication(firstNumber, secondNumber) {
+  let num1 = parseInt(firstNumber);
+  let num2 = parseInt(secondNumber);
+  let total = num1 * num2;
+  console.log("Total: " + total);
+  return total;
 }
 
 function doSubtraction(firstNumber, secondNumber) {
@@ -173,8 +259,6 @@ function reverseString(str) {
 
 function writeAnswerToScreen(total) {
   let totalAsString = String(total);
-  let answerString = String(answerScreen.innerText);
-  answerString = answerString.substring(0, answerString.length - 2);
-  answerString += " " + totalAsString;
-  answerScreen.innerHTML = answerString;
+  let newAnswer = "Ans = " + totalAsString;
+  answerScreen.innerHTML = newAnswer;
 }
